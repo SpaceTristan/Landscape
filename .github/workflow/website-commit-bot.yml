@@ -3,7 +3,7 @@ name: website-commit-bot
 on:
   push:
     branches:
-      - main
+      - 'main'
     paths:
       - 'blog/**'
 
