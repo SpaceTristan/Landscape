@@ -1,0 +1,36 @@
+name: website-commit-bot
+
+on:
+  push:
+    branches:
+      - 'main'
+    paths:
+      - 'blog/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Clone Separate Repository
+      uses: actions/checkout@v2
+      with:
+        repository: SpaceTristan/opendataforweb3.github.io
+        ref: main
+        path: opendataforweb3.github.io
+
+    - name: Copy New File to Separate Repository
+      run: |
+        rsync -a --delete blog/ opendataforweb3.github.io/content/en/blog/
+
+    - name: Push Changes to Separate Repository
+      run: |
+        cd opendataforweb3.github.io
+        git config user.name "website-commit-bot"
+        git config user.email "<>"
+        git add .
+        git commit -m "Auto file add"
+        git push origin main
