@@ -34,3 +34,5 @@ jobs:
         git add .
         git commit -m "Auto file add"
         git push origin main
+      env:
+        PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
