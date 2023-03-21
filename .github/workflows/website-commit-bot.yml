@@ -27,6 +27,8 @@ jobs:
         rsync -a --delete blog/ opendataforweb3.github.io/content/en/blog/
 
     - name: Push Changes to Separate Repository
+      env:
+        PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
       run: |
         cd opendataforweb3.github.io
         git config user.name "website-commit-bot"
@@ -34,5 +36,3 @@ jobs:
         git add .
         git commit -m "Auto file add"
         git push origin main
-      env:
-        PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
